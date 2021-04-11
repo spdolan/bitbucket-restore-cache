@@ -1,0 +1,51 @@
+image: node:12
+
+definitions:
+  caches:
+    node-js-client: client/node_modules
+    node-js-server: server/node_modules
+
+clear-bitbucket-caches: &clear-bitbucket-caches
+  name: Clear Cached Dependencies
+  script:
+    - pipe: atlassian/bitbucket-clear-cache:3.1.1
+      variables:
+        BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+        BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+        CACHES: ["node-js-client", "node-js-server"]
+
+download-cache-client: &download-cache-client
+  name: Download CI dependencies - Client
+  script:
+    - cd ./client
+    - yarn install --frozen-lockfile #npm ci equivalent
+  caches:
+    - node-js-client
+
+download-cache-server: &download-cache-server
+  name: Download CI dependencies - Server
+  script:
+    - cd ./server
+    - yarn install --frozen-lockfile #npm ci equivalent
+  caches:
+    - node-js-server
+
+pipelines:
+  custom:
+    clear-caches:
+      - step:
+          <<: *clear-bitbucket-caches
+    download-bitbucket-caches:
+      - parallel:
+        - step:
+            <<: *download-cache-client
+        - step:
+            <<: *download-cache-server
+    restore-bitbucket-caches:
+      - step:
+          <<: *clear-bitbucket-caches
+      - parallel:
+        - step:
+            <<: *download-cache-client
+        - step:
+            <<: *download-cache-server

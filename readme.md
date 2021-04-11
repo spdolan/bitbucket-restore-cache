@@ -2,7 +2,7 @@
 
 ## Problem
 
-[Bitbucket pipelines caches](https://support.atlassian.com/bitbucket-cloud/docs/cache-dependencies/) provide a great way to speed up CI builds, but expire after one week. This can sometimes lead to failed CI work within one's pipeline due to missing dependencies.
+[Bitbucket pipelines caches](https://support.atlassian.com/bitbucket-cloud/docs/cache-dependencies/) provide a great way to speed up CI builds, but expire after one week. This can sometimes lead to failed CI work within one's pipeline due to missing dependencies. Of course this most often occurs when the team is pushing the final code for a major release or as a hotfix before an important demo.
 
 ## Solution
 

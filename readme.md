@@ -31,7 +31,7 @@ Leverage Atlassian's existing toolset! They offer a [custom pipe for clearing ca
         * [Restoring our caches](./bitbucket-pipelines.yml#L44) - our explicit use case described above, which we'll invoke on a non-intrusive timeline.
     * Note here that we are leveraging [parallel steps](https://bitbucket.org/blog/speed-build-parallel-steps-pipelines) to save ourselves some time when running these pipelines.
 6. [Schedule our Restore Caches pipeline to run](https://confluence.atlassian.com/bitbucket/scheduled-builds-for-pipelines-933078702.html) at a non-intrusive hour (for me, that's ~4AM on a Sunday).
-  * Considering your team's habits and/or timezone, you may want to socialize this before making a heavy-handed (or frustrating) decision.
+    * Considering your team's habits and/or timezone, you may want to socialize this before making a heavy-handed (or frustrating) decision.
 
 
 And that's it! Happy coding, without worrying about cached dependencies being what crashes your CI builds.
